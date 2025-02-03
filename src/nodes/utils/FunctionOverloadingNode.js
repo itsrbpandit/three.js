@@ -1,7 +1,5 @@
 import Node from '../core/Node.js';
-import { nodeProxy } from '../tsl/TSLBase.js';
-
-/** @module FunctionOverloadingNode **/
+import { nodeProxy } from '../tsl/TSLCore.js';
 
 /**
  * This class allows to define multiple overloaded versions

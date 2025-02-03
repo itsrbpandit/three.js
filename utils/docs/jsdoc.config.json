@@ -4,7 +4,17 @@
             "encoding": "utf8",
             "package": "package.json",
             "recurse": true,
-            "template": "node_modules/clean-jsdoc-theme"
+            "template": "utils/docs/template"
     },
-    "plugins": [ "plugins/markdown" ]
+    "plugins": [ "plugins/markdown" ],
+    "source": {
+        "include": [
+            "examples/jsm/tsl",
+            "src/loaders/nodes", 
+            "src/materials/nodes", 
+            "src/nodes", 
+            "src/renderers/common", 
+            "src/renderers/webgpu" 
+        ]
+    }
 }

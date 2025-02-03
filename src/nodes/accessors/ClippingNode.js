@@ -8,14 +8,11 @@ import { smoothstep } from '../math/MathNode.js';
 import { uniformArray } from './UniformArrayNode.js';
 import { builtin } from './BuiltinNode.js';
 
-/** @module ClippingNode **/
-
 /**
- * ```
  * This node is used in {@link NodeMaterial} to setup the clipping
  * which can happen hardware-accelerated (if supported) and optionally
  * use alpha-to-coverage for anti-aliasing clipped edges.
- * ```
+ *
  * @augments Node
  */
 class ClippingNode extends Node {

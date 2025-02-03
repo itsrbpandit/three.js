@@ -2,8 +2,6 @@ import Node from '../core/Node.js';
 import { NodeUpdateType } from '../core/constants.js';
 import { addMethodChaining, nodeObject } from '../tsl/TSLCore.js';
 
-/** @module ComputeNode **/
-
 /**
  * TODO
  *
@@ -74,6 +72,14 @@ class ComputeNode extends Node {
 		this.version = 1;
 
 		/**
+		 * The name or label of the uniform.
+		 *
+		 * @type {String}
+		 * @default ''
+		 */
+		this.name = '';
+
+		/**
 		 * The `updateBeforeType` is set to `NodeUpdateType.OBJECT` since {@link ComputeNode#updateBefore}
 		 * is executed once per object by default.
 		 *
@@ -94,11 +100,25 @@ class ComputeNode extends Node {
 	}
 
 	/**
-	 * Executes the `dispose` event for this noode.
+	 * Executes the `dispose` event for this node.
 	 */
 	dispose() {
 
 		this.dispatchEvent( { type: 'dispose' } );
+
+	}
+
+	/**
+	 * Sets the {@link ComputeNode#name} property.
+	 *
+	 * @param {String} name - The name of the uniform.
+	 * @return {ComputeNode} A reference to this node.
+	 */
+	label( name ) {
+
+		this.name = name;
+
+		return this;
 
 	}
 

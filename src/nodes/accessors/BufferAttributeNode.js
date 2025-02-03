@@ -6,8 +6,6 @@ import { InterleavedBufferAttribute } from '../../core/InterleavedBufferAttribut
 import { InterleavedBuffer } from '../../core/InterleavedBuffer.js';
 import { StaticDrawUsage, DynamicDrawUsage } from '../../constants.js';
 
-/** @module BufferAttributeNode **/
-
 /**
  * In earlier `three.js` versions it was only possible to define attribute data
  * on geometry level. With `BufferAttributeNode`, it is also possible to do this
@@ -24,7 +22,7 @@ import { StaticDrawUsage, DynamicDrawUsage } from '../../constants.js';
  * material.colorNode = bufferAttribute( new THREE.Float32BufferAttribute( colors, 3 ) );
  * ```
  * This new approach is especially interesting when geometry data are generated via
- * compute shaders. The below line converts a storage buffer into an attribute.
+ * compute shaders. The below line converts a storage buffer into an attribute node.
  * ```js
  * material.positionNode = positionBuffer.toAttribute();
  * ```
@@ -271,7 +269,7 @@ class BufferAttributeNode extends InputNode {
 	/**
 	 * Sets the `instanced` property to the given value.
 	 *
-	 * @param {Number} value - The value to set.
+	 * @param {Boolean} value - The value to set.
 	 * @return {BufferAttributeNode} A reference to this node.
 	 */
 	setInstanced( value ) {

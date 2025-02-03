@@ -2,8 +2,6 @@ import Node from '../core/Node.js';
 import { property } from '../core/PropertyNode.js';
 import { addMethodChaining, nodeProxy } from '../tsl/TSLCore.js';
 
-/** @module ConditionalNode **/
-
 /**
  * Represents a logical `if/else` statement. Can be used as an alternative
  * to the `If()`/`Else()` syntax.
@@ -69,11 +67,23 @@ class ConditionalNode extends Node {
 	 */
 	getNodeType( builder ) {
 
-		const ifType = this.ifNode.getNodeType( builder );
+		const { ifNode, elseNode } = builder.getNodeProperties( this );
 
-		if ( this.elseNode !== null ) {
+		if ( ifNode === undefined ) {
 
-			const elseType = this.elseNode.getNodeType( builder );
+			// fallback setup
+
+			this.setup( builder );
+
+			return this.getNodeType( builder );
+
+		}
+
+		const ifType = ifNode.getNodeType( builder );
+
+		if ( elseNode !== null ) {
+
+			const elseType = elseNode.getNodeType( builder );
 
 			if ( builder.getTypeLength( elseType ) > builder.getTypeLength( ifType ) ) {
 
@@ -199,8 +209,15 @@ export const select = /*@__PURE__*/ nodeProxy( ConditionalNode );
 
 addMethodChaining( 'select', select );
 
-//
+// Deprecated
 
+/**
+ * @function
+ * @deprecated since r168. Use {@link select} instead.
+ *
+ * @param  {...any} params
+ * @returns {ConditionalNode}
+ */
 export const cond = ( ...params ) => { // @deprecated, r168
 
 	console.warn( 'TSL.ConditionalNode: cond() has been renamed to select().' );

@@ -10,14 +10,12 @@ import { Vector2 } from '../../math/Vector2.js';
 import { DepthTexture } from '../../textures/DepthTexture.js';
 import { RenderTarget } from '../../core/RenderTarget.js';
 
-/** @module PassNode **/
-
 const _size = /*@__PURE__*/ new Vector2();
 
 /**
  * Represents the texture of a pass node.
  *
- * @augments module:TextureNode~TextureNode
+ * @augments TextureNode
  */
 class PassTextureNode extends TextureNode {
 
@@ -68,7 +66,7 @@ class PassTextureNode extends TextureNode {
  * An extension of `PassTextureNode` which allows to manage more than one
  * internal texture. Relevant for the `getPreviousTexture()` related API.
  *
- * @augments module:PassTextureNode~PassTextureNode
+ * @augments PassTextureNode
  */
 class PassMultipleTextureNode extends PassTextureNode {
 
@@ -546,12 +544,14 @@ class PassNode extends TempNode {
 
 		this.renderTarget.samples = this.options.samples === undefined ? renderer.samples : this.options.samples;
 
-		// Disable MSAA for WebGL backend for now
+		// TODO: Disable MSAA for WebGL backend for now
 		if ( renderer.backend.isWebGLBackend === true ) {
 
 			this.renderTarget.samples = 0;
 
 		}
+
+		this.renderTarget.texture.type = renderer.getColorBufferType();
 
 		return this.scope === PassNode.COLOR ? this.getTextureNode() : this.getLinearDepthNode();
 
